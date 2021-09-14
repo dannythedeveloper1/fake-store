@@ -1,14 +1,35 @@
-import React from 'react'
-import { Container,Img,Title } from '../../Component/Styles/Styles'
+import React from "react";
+import {
+    Button,
+	Container,
+	Img,
+	Title,
+} from "../../Component/Styles/Styles";
 
-const ProductCard = ({title,image,price}) => {
-    return (
-        <Container bdr="1px solid black" bgColor="lightgray" width="250px" height="350px">
-            <Title size="medium" weight="800">{title}</Title>
-            {/* <Img src={image} /> */}
-            <Title size="large" weight="700">{price}</Title>
-        </Container>
-    )
-}
+const ProductCard = ({ title, image, price }) => {
+	return (
+		<Container
+			bdr="1px solid black"
+			bgColor="lightgray"
+			width="250px"
+			height="350px"
+			pad="45px"
+			display="flex"
+			direction="column"
+			alItm="center"
+		>
+			<Title size="medium" weight="800">
+				{title}
+			</Title>
+			<div style={{ width: "150px", height: "150px" }}>
+				<Img src={image} />
+			</div>
+			<Title size="large" weight="700">
+				${price}
+			</Title>
+			<Button bgColor="#3498db">Add to Cart</Button>
+		</Container>
+	);
+};
 
-export default ProductCard
+export default ProductCard;
