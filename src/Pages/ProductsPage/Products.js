@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ProductContext } from "../../context/ProductContext";
 import ProductCard from "./ProductCard";
 // const data= require( "../../products.json");
 
 const Products = () => {
-	const [products, setProducts] = useState([]);
-	useEffect(() => {
-		fetch("./products.json")
-			.then((res) => res.json())
-			.then((json) => setProducts(json));
-    }, []);
+    const [products, setProducts] = useContext(ProductContext);
+    console.log(products);
+	//const [products, setProducts] = useState([]);
+	// useEffect(() => {
+	// 	fetch("./products.json")
+	// 		.then((res) => res.json())
+	// 		.then((json) => setProducts(json));
+    // }, []);
     
     const styles = {
         display: "flex",
