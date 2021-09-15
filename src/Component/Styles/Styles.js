@@ -8,6 +8,7 @@ export const Container = styled.div`
 	border-radius: ${(props) => props.radius};
 	padding: ${(props) => props.pad};
 	display: ${(props) => props.display};
+	justify-content: ${(props) => props.jstCnt};
 	align-items: ${(props) => props.alItm};
 	flex-direction: ${(props) => props.direction};
 `;
@@ -16,7 +17,9 @@ export const Title = styled.h5`
 	font-size: ${(props) => props.size};
 	font-weight: ${(props) => props.weight};
 	color: ${(props) => props.color};
-	width: 200px;
+	width: ${(props) => props.width};
+	text-align: ${(props) => props.txtAlign};
+	margin: ${(props) => props.margin};
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -38,4 +41,11 @@ export const Button = styled.button`
 	font-weight: 700;
 	font-size: medium;
 	cursor: pointer;
+`;
+
+export const Input = styled.input`
+	font-size: 32px;
+	width: 350px;
+	border: none;
+	outline: none;
 `;
