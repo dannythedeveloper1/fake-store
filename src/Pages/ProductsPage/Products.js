@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 const Products = () => {
     const [products, setProducts] = useContext(ProductContext);
     console.log(products);
-	//const [products, setProducts] = useState([]);
+	// const [products, setProducts] = useState([]);
 	// useEffect(() => {
 	// 	fetch("./products.json")
 	// 		.then((res) => res.json())
