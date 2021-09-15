@@ -10,6 +10,7 @@ const ProductCard = ({ title, image, price }) => {
 	return (
 		<Container
 			bdr="1px solid black"
+			radius="15px"
 			bgColor="lightgray"
 			width="250px"
 			height="350px"

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Title } from "../../Component/Styles/Styles";
 import ProductCard from "./ProductCard";
 // const data= require( "../../products.json");
 

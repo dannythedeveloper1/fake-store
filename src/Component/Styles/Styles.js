@@ -5,10 +5,11 @@ export const Container = styled.div`
 	height: ${(props) => props.height};
 	background-color: ${(props) => props.bgColor};
 	border: ${(props) => props.bdr};
+	border-radius: ${(props) => props.radius};
 	padding: ${(props) => props.pad};
 	display: ${(props) => props.display};
 	align-items: ${(props) => props.alItm};
-	flex-direction: ${props=>props.direction};
+	flex-direction: ${(props) => props.direction};
 `;
 
 export const Title = styled.h5`
