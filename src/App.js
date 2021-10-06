@@ -7,7 +7,7 @@ function App() {
 	return (
 		<div>
 			<Nav />
-			<Container height="90vh">
+			<Container minHeight="90vh" bgColor="lightgray">
 				<Products />
 			</Container>
 		</div>
