@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-	BUY_PRODUCT,
 	FETCH_PRODUCTS_FAILURE,
 	FETCH_PRODUCTS_REQUEST,
 	FETCH_PRODUCTS_SUCCESS,
@@ -26,13 +25,6 @@ export const fetchProductsFailure = (error) => {
 	};
 };
 
-export const buyProduct = (id) => {
-	return {
-		type: BUY_PRODUCT,
-		payload: id,
-	};
-};
-
 export const fetchProducts = () => {
 	return (dispatch) => {
 		dispatch(fetchProductsRequest());
@@ -51,9 +43,9 @@ export const searchProducts = (category) => {
 			.then((res) => {
 				const filteredData = res.data.filter(
 					(product) => product.category === category
-                );
-                dispatch(fetchProductsSuccess(filteredData))
-			})		
+				);
+				dispatch(fetchProductsSuccess(filteredData));
+			})
 			.catch((error) => dispatch(fetchProductsFailure(error.message)));
 	};
 };
