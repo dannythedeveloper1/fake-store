@@ -1,28 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container, Input } from "./Styles/Styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { ProductContext } from "../context/ProductContext";
-import { filteredProducts } from "../utils/utils";
 import { searchProducts } from "../redux";
-import { connect } from "react-redux";
-const Search = (props) => {
-	// const [products, setProducts] = useContext(ProductContext);
+import {  useDispatch} from "react-redux";
+const Search = () => {
+	const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const searchValue = useRef(null);
-	// useEffect(() => {
-	// 	(async () => {
-	// 		const newProducts = await filteredProducts(searchTerm);
-	// 		console.log(newProducts);
-	// 		if (newProducts) {
-	// 			setProducts(newProducts);
-	// 		}
-	// 	})();
 
-	// 	// then(res=>setProducts(res))
-	// }, [searchTerm]);
 
 	useEffect(() => {
-		props.search(searchTerm);
+		dispatch(searchProducts(searchTerm));
 	}, [searchTerm])
 
 
@@ -50,10 +38,6 @@ const Search = (props) => {
 	);
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		search:(category)=>dispatch(searchProducts(category))
-	}
-}
 
-export default connect(null,mapDispatchToProps)(Search);
+
+export default (Search);

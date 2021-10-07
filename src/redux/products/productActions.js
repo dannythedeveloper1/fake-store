@@ -1,5 +1,4 @@
 import axios from "axios";
-import { filteredProducts } from "../../utils/utils";
 import {
 	BUY_PRODUCT,
 	FETCH_PRODUCTS_FAILURE,
