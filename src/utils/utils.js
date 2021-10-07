@@ -14,7 +14,7 @@ export const filteredProducts = async (category) => {
 	return filteredData;
 };
 
-export const searchProduct = async (searchTerm) => {
-    const products = await allProducts();
+// export const searchProduct = async (searchTerm) => {
+//     const products = await allProducts();
     
-};
+// };
