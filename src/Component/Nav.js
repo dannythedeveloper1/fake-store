@@ -2,7 +2,10 @@ import React from "react";
 import Search from "./Search";
 import { Container, Title } from "./Styles/Styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const Nav = () => {
+	const quantity = useSelector((state) => state.cart.quantity);
 	return (
 		<Container
 			height="10vh"
@@ -10,16 +13,22 @@ const Nav = () => {
 			display="flex"
 			alItm="center"
 			jstCnt="space-around"
+			position="sticky"
+			top="0"
 		>
-			<Title color="white" margin="0" size="xx-large">
-				Fake Store
-			</Title>
+			<Link to="/">
+				<Title color="white" margin="0" size="xx-large">
+					Fake Store
+				</Title>
+			</Link>
 			<Search />
 			<Container display="flex" alItm="center">
-				<ShoppingCartOutlinedIcon style={{ color: "white" }} />
-				<Title color="white" size="x-large" margin="0 0 0 10px">
-					0
-				</Title>
+				<Link to="/checkout">
+					<ShoppingCartOutlinedIcon style={{ color: "white" }} />
+					<Title color="white" size="x-large" margin="0 0 0 10px">
+						{quantity}
+					</Title>
+				</Link>
 			</Container>
 		</Container>
 	);

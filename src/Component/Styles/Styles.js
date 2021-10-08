@@ -12,6 +12,8 @@ export const Container = styled.div`
 	justify-content: ${(props) => props.jstCnt};
 	align-items: ${(props) => props.alItm};
 	flex-direction: ${(props) => props.direction};
+	position: ${(props) => props.position};
+	top: ${(props) => props.top};
 `;
 
 export const Title = styled.h5`

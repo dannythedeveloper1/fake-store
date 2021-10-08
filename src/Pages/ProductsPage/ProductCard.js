@@ -1,23 +1,30 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {
-    Button,
-	Container,
-	Img,
-	Title,
-} from "../../Component/Styles/Styles";
+import { Button, Container, Img, Title } from "../../Component/Styles/Styles";
 import { addProduct } from "../../redux";
 
-const ProductCard = ({ title, image, price }) => {
+const ProductCard = ({ title, image, price, id, category }) => {
 	const dispatch = useDispatch();
-	const items = useSelector(state => state.cart.items);
+	const items = useSelector((state) => state.cart.items);
+	const quantity = useSelector((state) => state.cart.quantity);
 
 	const handleClick = () => {
-		const singleItem = { title: title, image: image, price: price };
-		const newItems = [...items, singleItem];
-		dispatch(addProduct(newItems));
-	}
+		const singleItem = {
+			title: title,
+			image: image,
+			price: price,
+			id: id,
+			category: category,
+		};
+		const itemsId = items.map((item) => item.id);
+		if (itemsId.includes(id)) {
+			dispatch(addProduct(null));
+		} else {
+			const newItems = [...items, singleItem];
+			dispatch(addProduct(newItems));
+		}
+	};
 
 	return (
 		<Container
@@ -36,11 +43,12 @@ const ProductCard = ({ title, image, price }) => {
 			<div style={{ width: "150px", height: "150px" }}>
 				<Img src={image} />
 			</div>
-			<Title size="large" weight="700" txtAlign=
-			"center">
+			<Title size="large" weight="700" txtAlign="center">
 				${price}
 			</Title>
-			<Button bgColor="#3498db" onClick={handleClick}>Add to Cart</Button>
+			<Button bgColor="#3498db" onClick={handleClick}>
+				Add to Cart
+			</Button>
 		</Container>
 	);
 };

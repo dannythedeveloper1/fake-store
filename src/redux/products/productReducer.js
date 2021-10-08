@@ -1,5 +1,4 @@
 import {
-	BUY_PRODUCT,
 	FETCH_PRODUCTS_FAILURE,
 	FETCH_PRODUCTS_REQUEST,
 	FETCH_PRODUCTS_SUCCESS,
@@ -30,9 +29,6 @@ const productReducer = (state = initialState, action) => {
 				loading: false,
 				error: action.payload,
 			};
-		// case BUY_PRODUCT:
-		// 	return {};
-
 		default:
 			return state;
 	}
