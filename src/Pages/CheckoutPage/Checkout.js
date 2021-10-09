@@ -5,6 +5,12 @@ import CheckoutCard from "./CheckoutCard";
 const Checkout = () => {
 	const items = useSelector((state) => state.cart.items);
 
+	const key = "id";
+	const uniqueItems = [
+		...new Map(items.map((item) => [item[key], item])).values(),
+	];
+
+
 	const styles = {
 		display: "flex",
 		flexDirection: "column",
@@ -35,7 +41,7 @@ const Checkout = () => {
 	return (
 		<div style={styles.mainContainer}>
 			<div style={styles}>
-				{items.map((item) => (
+				{uniqueItems.map((item) => (
 					<div style={{ margin: "10px" }} key={item.id}>
 						<CheckoutCard
 							title={item.title}
@@ -63,7 +69,12 @@ const Checkout = () => {
 						<h1>$300</h1>
 					</div>
 				</div>
-				<Button bgColor="#3498db" style={{fontSize:"25px",padding:"10px 20px"}}>Checkout</Button>
+				<Button
+					bgColor="#3498db"
+					style={{ fontSize: "25px", padding: "10px 20px" }}
+				>
+					Checkout
+				</Button>
 			</div>
 		</div>
 	);

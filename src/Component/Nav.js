@@ -5,7 +5,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Nav = () => {
-	const quantity = useSelector((state) => state.cart.quantity);
+	const items = useSelector((state) => state.cart.items);
 	return (
 		<Container
 			height="10vh"
@@ -26,7 +26,7 @@ const Nav = () => {
 				<Link to="/checkout">
 					<ShoppingCartOutlinedIcon style={{ color: "white" }} />
 					<Title color="white" size="x-large" margin="0 0 0 10px">
-						{quantity}
+						{items.length}
 					</Title>
 				</Link>
 			</Container>

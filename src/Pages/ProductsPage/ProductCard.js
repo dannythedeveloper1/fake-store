@@ -7,7 +7,6 @@ import { addProduct } from "../../redux";
 const ProductCard = ({ title, image, price, id, category }) => {
 	const dispatch = useDispatch();
 	const items = useSelector((state) => state.cart.items);
-	const quantity = useSelector((state) => state.cart.quantity);
 
 	const handleClick = () => {
 		const singleItem = {
@@ -17,13 +16,8 @@ const ProductCard = ({ title, image, price, id, category }) => {
 			id: id,
 			category: category,
 		};
-		const itemsId = items.map((item) => item.id);
-		if (itemsId.includes(id)) {
-			dispatch(addProduct(null));
-		} else {
-			const newItems = [...items, singleItem];
-			dispatch(addProduct(newItems));
-		}
+		const newItems = [...items, singleItem];
+		dispatch(addProduct(newItems));
 	};
 
 	return (

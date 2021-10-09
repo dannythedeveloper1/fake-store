@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../Component/Styles/Styles";
-import { removeProduct } from "../../redux";
+import { addProduct, addQuantity, removeProduct } from "../../redux";
 import {
 	CheckoutCategory,
 	CheckoutContainer,
@@ -15,9 +15,33 @@ import {
 const CheckoutCard = ({ title, image, price, id, category }) => {
 	const items = useSelector((state) => state.cart.items);
 	const dispatch = useDispatch();
+
+	const similarItems = items.filter((item) => item.id == id);
+
 	const handleClick = () => {
-        const newItems = items.filter(item => item.id !== id);
-        dispatch(removeProduct(newItems));
+		const newItems = items.filter((item) => item.id !== id);
+		dispatch(removeProduct(newItems));
+	};
+
+	const addItem = () => {
+		const singleItem = {
+			title: title,
+			image: image,
+			price: price,
+			id: id,
+			category: category,
+		};
+		const newItems = [...items, singleItem];
+		dispatch(addProduct(newItems));
+	};
+
+	const removeItem = () => {
+		const index = items.findIndex((item) => item.id === id);
+		let newItems = [...items];
+		if (index >= 0) {
+            newItems.splice(index, 1);
+		dispatch(removeProduct(newItems));
+		}
 	};
 
 	return (
@@ -29,9 +53,9 @@ const CheckoutCard = ({ title, image, price, id, category }) => {
 					<CheckoutCategory>{category}</CheckoutCategory>
 					<CheckoutQuantity>
 						<h4 style={{ margin: "0", marginRight: "10px" }}>Quantity</h4>
-						<Span>-</Span>
-						<Span style={{ margin: "0 8px" }}>1</Span>
-						<Span>+</Span>
+						<Span onClick={removeItem}>-</Span>
+						<Span style={{ margin: "0 8px" }}>{similarItems.length}</Span>
+						<Span onClick={addItem}>+</Span>
 					</CheckoutQuantity>
 				</div>
 			</ItemDetails>
