@@ -4,7 +4,7 @@ import Nav from "./Component/Nav";
 import { Container } from "./Component/Styles/Styles";
 import Products from "./Pages/ProductsPage/Products";
 import store from "./redux/store";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {Switch, Route } from "react-router-dom";
 import Checkout from "./Pages/CheckoutPage/Checkout";
 
 function App() {
@@ -12,7 +12,6 @@ function App() {
 		<Provider store={store}>
 			<div>
 				<Nav />
-
 				<Container minHeight="90vh" bgColor="lightgray">
 					<Switch>
 						<Route exact path="/">

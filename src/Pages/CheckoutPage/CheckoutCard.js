@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../Component/Styles/Styles";
-import { addProduct, addQuantity, removeProduct } from "../../redux";
+import { addProduct, removeProduct } from "../../redux";
 import {
 	CheckoutCategory,
 	CheckoutContainer,
@@ -16,7 +16,7 @@ const CheckoutCard = ({ title, image, price, id, category }) => {
 	const items = useSelector((state) => state.cart.items);
 	const dispatch = useDispatch();
 
-	const similarItems = items.filter((item) => item.id == id);
+	const similarItems = items.filter((item) => item.id === id);
 
 	const handleClick = () => {
 		const newItems = items.filter((item) => item.id !== id);

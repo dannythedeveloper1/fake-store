@@ -16,14 +16,14 @@ const Nav = () => {
 			position="sticky"
 			top="0"
 		>
-			<Link to="/">
+			<Link to="/" style={{textDecoration:"none"}}>
 				<Title color="white" margin="0" size="xx-large">
 					Fake Store
 				</Title>
 			</Link>
 			<Search />
 			<Container display="flex" alItm="center">
-				<Link to="/checkout">
+				<Link to="/checkout" style={{display:"flex", alignItems:"center", textDecoration:"none"}}>
 					<ShoppingCartOutlinedIcon style={{ color: "white" }} />
 					<Title color="white" size="x-large" margin="0 0 0 10px">
 						{items.length}

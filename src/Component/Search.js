@@ -8,7 +8,6 @@ const Search = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const searchValue = useRef(null);
 
-
 	useEffect(() => {
 		dispatch(searchProducts(searchTerm));
 	}, [searchTerm])
@@ -16,7 +15,7 @@ const Search = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSearchTerm(searchValue.current.value);
+		setSearchTerm(searchValue.current.value);		
 	};
 	return (
 		<Container

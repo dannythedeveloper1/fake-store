@@ -5,11 +5,16 @@ import CheckoutCard from "./CheckoutCard";
 const Checkout = () => {
 	const items = useSelector((state) => state.cart.items);
 
+	const price = items.map((item) => item.price);
+	const subTotal = price.reduce((a, b) => a + b, 0);
+	const tax = subTotal * (6 / 100);
+	const Total = subTotal + tax;
+
+	//unique items in the cart
 	const key = "id";
 	const uniqueItems = [
 		...new Map(items.map((item) => [item[key], item])).values(),
 	];
-
 
 	const styles = {
 		display: "flex",
@@ -63,10 +68,10 @@ const Checkout = () => {
 						<h1>Total</h1>
 					</div>
 					<div>
-						<h3>$100</h3>
-						<p>$100</p>
-						<p>$100</p>
-						<h1>$300</h1>
+						<h3>$ {subTotal.toFixed(2)}</h3>
+						<p>$ {tax.toFixed(2)}</p>
+						<p>$ TBD</p>
+						<h1>$ {Total.toFixed(2)}</h1>
 					</div>
 				</div>
 				<Button
