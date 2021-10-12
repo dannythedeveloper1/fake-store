@@ -6,6 +6,7 @@ import Products from "./Pages/ProductsPage/Products";
 import store from "./redux/store";
 import {Switch, Route } from "react-router-dom";
 import Checkout from "./Pages/CheckoutPage/Checkout";
+import SearchPage from "./Pages/SearchPage/SearchPage";
 
 function App() {
 	return (
@@ -16,6 +17,9 @@ function App() {
 					<Switch>
 						<Route exact path="/">
 							<Products />
+						</Route>
+						<Route exact path="/search">
+							<SearchPage />
 						</Route>
 						<Route path="/checkout">
 							<Checkout />

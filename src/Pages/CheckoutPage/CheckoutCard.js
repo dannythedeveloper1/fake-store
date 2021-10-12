@@ -60,7 +60,7 @@ const CheckoutCard = ({ title, image, price, id, category }) => {
 				</div>
 			</ItemDetails>
 			<div>
-				<h3>${price}</h3>
+				<h3>$ {price}</h3>
 			</div>
 			<Button bgColor="#3498db" onClick={handleClick}>
 				Remove

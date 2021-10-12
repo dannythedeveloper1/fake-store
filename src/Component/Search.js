@@ -2,20 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import { Container, Input } from "./Styles/Styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { searchProducts } from "../redux";
-import {  useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 const Search = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
-    const [searchTerm, setSearchTerm] = useState("");
-    const searchValue = useRef(null);
+	const [searchTerm, setSearchTerm] = useState("");
+	const searchValue = useRef(null);
 
 	useEffect(() => {
 		dispatch(searchProducts(searchTerm));
-	}, [searchTerm])
-
+	}, [searchTerm]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSearchTerm(searchValue.current.value);		
+		setSearchTerm(searchValue.current.value);
+		history.push("./search");
 	};
 	return (
 		<Container
@@ -28,15 +30,11 @@ const Search = () => {
 			alItm="center"
 		>
 			<form onSubmit={handleSubmit}>
-				<Input
-					ref={searchValue}
-				/>
+				<Input ref={searchValue} />
 				<SearchIcon />
 			</form>
 		</Container>
 	);
 };
 
-
-
-export default (Search);
+export default Search;
