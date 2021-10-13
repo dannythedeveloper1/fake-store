@@ -1,23 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { connect} from "react-redux";
 import { Button, Container, Img, Title } from "../../Component/Styles/Styles";
 import { addProduct } from "../../redux";
 
-const ProductCard = ({ title, image, price, id, category }) => {
-	const dispatch = useDispatch();
-	const items = useSelector((state) => state.cart.items);
+const ProductCard = (props) => {
+	// useEffect(() => {
+	// console.log(props.items)
+	// }, [])
+
+
+	// const dispatch = useDispatch();
+	// const items = useSelector((state) => state.cart.items);
 
 	const handleClick = () => {
 		const singleItem = {
-			title: title,
-			image: image,
-			price: price,
-			id: id,
-			category: category,
+			title: props.title,
+			image: props.image,
+			price: props.price,
+			id: props.id,
+			category: props.category,
 		};
-		const newItems = [...items, singleItem];
-		dispatch(addProduct(newItems));
+		const newItems = [...props.items, singleItem];
+		props.addProduct(newItems);
 	};
 
 	return (
@@ -32,13 +36,13 @@ const ProductCard = ({ title, image, price, id, category }) => {
 			alItm="center"
 		>
 			<Title size="medium" weight="800" width="200px">
-				{title}
+				{props.title}
 			</Title>
 			<div style={{ width: "150px", height: "150px" }}>
-				<Img src={image} />
+				<Img src={props.image} />
 			</div>
 			<Title size="large" weight="700" txtAlign="center">
-				${price}
+				$ {props.price}
 			</Title>
 			<Button bgColor="#3498db" onClick={handleClick}>
 				Add to Cart
@@ -47,4 +51,15 @@ const ProductCard = ({ title, image, price, id, category }) => {
 	);
 };
 
-export default ProductCard;
+const mapStateToProps = (state) => {
+	return {
+		items: state.cart.items,
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addProduct: (e) => dispatch(addProduct(e)),
+	};
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProductCard);

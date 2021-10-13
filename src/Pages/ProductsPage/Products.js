@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { fetchProducts } from "../../redux";
 import ProductCard from "./ProductCard";
 
-const Products = () => {
-	const products = useSelector((state) => state.products.products);
-	const dispatch = useDispatch();
+const Products = (props) => {
 	useEffect(() => {
-		dispatch(fetchProducts());
+		props.fetchProducts();
 	}, []);
 
 	const styles = {
@@ -18,7 +16,7 @@ const Products = () => {
 
 	return (
 		<div style={styles}>
-			{products.map((product) => (
+			{props.products.map((product) => (
 				<div style={{ margin: "10px" }} key={product.id}>
 					<ProductCard
 						title={product.title}
@@ -33,4 +31,15 @@ const Products = () => {
 	);
 };
 
-export default Products;
+const mapStateToProps = (state) => {
+	return {
+		products:state.products.products
+	}
+}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchProducts:()=>dispatch(fetchProducts())
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Products);
