@@ -2,16 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { Container, Input } from "./Styles/Styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { searchProducts } from "../redux";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { useHistory } from "react-router";
-const Search = () => {
+const Search = (props) => {
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const [searchTerm, setSearchTerm] = useState("");
 	const searchValue = useRef(null);
 
 	useEffect(() => {
-		dispatch(searchProducts(searchTerm));
+		props.searchProducts(searchTerm);
 	}, [searchTerm]);
 
 	const handleSubmit = (e) => {
@@ -37,4 +36,10 @@ const Search = () => {
 	);
 };
 
-export default Search;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		searchProducts:(parameter)=>dispatch(searchProducts(parameter)),
+	}
+}
+
+export default connect(null,mapDispatchToProps)(Search);

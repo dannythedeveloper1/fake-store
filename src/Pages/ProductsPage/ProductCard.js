@@ -1,17 +1,8 @@
-import React, { useEffect } from "react";
 import { connect} from "react-redux";
 import { Button, Container, Img, Title } from "../../Component/Styles/Styles";
 import { addProduct } from "../../redux";
 
 const ProductCard = (props) => {
-	// useEffect(() => {
-	// console.log(props.items)
-	// }, [])
-
-
-	// const dispatch = useDispatch();
-	// const items = useSelector((state) => state.cart.items);
-
 	const handleClick = () => {
 		const singleItem = {
 			title: props.title,

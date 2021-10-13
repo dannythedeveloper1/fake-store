@@ -1,11 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Button } from "../../Component/Styles/Styles";
 import CheckoutCard from "./CheckoutCard";
-const Checkout = () => {
-	const items = useSelector((state) => state.cart.items);
-
-	const price = items.map((item) => item.price);
+const Checkout = (props) => {
+	const price = props.items.map((item) => item.price);
 	const subTotal = price.reduce((a, b) => a + b, 0);
 	const tax = subTotal * (6 / 100);
 	const Total = subTotal + tax;
@@ -13,7 +11,7 @@ const Checkout = () => {
 	//unique items in the cart
 	const key = "id";
 	const uniqueItems = [
-		...new Map(items.map((item) => [item[key], item])).values(),
+		...new Map(props.items.map((item) => [item[key], item])).values(),
 	];
 
 	const styles = {
@@ -85,4 +83,10 @@ const Checkout = () => {
 	);
 };
 
-export default Checkout;
+const mapStateToProps = (state) => {
+	return {
+		items: state.cart.items,
+	};
+};
+
+export default connect(mapStateToProps,null)(Checkout);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {connect } from "react-redux";
 import { Button } from "../../Component/Styles/Styles";
 import { addProduct, removeProduct } from "../../redux";
 import {
@@ -12,45 +12,42 @@ import {
 	Span,
 } from "./CheckoutCardStyles";
 
-const CheckoutCard = ({ title, image, price, id, category }) => {
-	const items = useSelector((state) => state.cart.items);
-	const dispatch = useDispatch();
-
-	const similarItems = items.filter((item) => item.id === id);
+const CheckoutCard = (props) => {
+	const similarItems = props.items.filter((item) => item.id === props.id);
 
 	const handleClick = () => {
-		const newItems = items.filter((item) => item.id !== id);
-		dispatch(removeProduct(newItems));
+		const newItems = props.items.filter((item) => item.id !== props.id);
+		props.removeProduct(newItems);
 	};
 
 	const addItem = () => {
 		const singleItem = {
-			title: title,
-			image: image,
-			price: price,
-			id: id,
-			category: category,
+			title: props.title,
+			image: props.image,
+			price: props.price,
+			id: props.id,
+			category: props.category,
 		};
-		const newItems = [...items, singleItem];
-		dispatch(addProduct(newItems));
+		const newItems = [...props.items, singleItem];
+		props.addProduct(newItems);
 	};
 
 	const removeItem = () => {
-		const index = items.findIndex((item) => item.id === id);
-		let newItems = [...items];
+		const index = props.items.findIndex((item) => item.id === props.id);
+		let newItems = [...props.items];
 		if (index >= 0) {
-            newItems.splice(index, 1);
-		dispatch(removeProduct(newItems));
+			newItems.splice(index, 1);
+			props.removeProduct(newItems);
 		}
 	};
 
 	return (
 		<CheckoutContainer>
 			<ItemDetails>
-				<CheckoutImg src={image} alt="" />
+				<CheckoutImg src={props.image} alt="" />
 				<div>
-					<CheckoutTitle>{title}</CheckoutTitle>
-					<CheckoutCategory>{category}</CheckoutCategory>
+					<CheckoutTitle>{props.title}</CheckoutTitle>
+					<CheckoutCategory>{props.category}</CheckoutCategory>
 					<CheckoutQuantity>
 						<h4 style={{ margin: "0", marginRight: "10px" }}>Quantity</h4>
 						<Span onClick={removeItem}>-</Span>
@@ -60,7 +57,7 @@ const CheckoutCard = ({ title, image, price, id, category }) => {
 				</div>
 			</ItemDetails>
 			<div>
-				<h3>$ {price}</h3>
+				<h3>$ {props.price}</h3>
 			</div>
 			<Button bgColor="#3498db" onClick={handleClick}>
 				Remove
@@ -69,4 +66,17 @@ const CheckoutCard = ({ title, image, price, id, category }) => {
 	);
 };
 
-export default CheckoutCard;
+const mapStateToProps = (state) => {
+	return {
+		items: state.cart.items,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addProduct: (parameter) => dispatch(addProduct(parameter)),
+		removeProduct: (parameter) => dispatch(removeProduct(parameter)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCard);

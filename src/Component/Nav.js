@@ -2,10 +2,9 @@ import React from "react";
 import Search from "./Search";
 import { Container, Title } from "./Styles/Styles";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-const Nav = () => {
-	const items = useSelector((state) => state.cart.items);
+import { connect } from "react-redux";
+const Nav = (props) => {
 	return (
 		<Container
 			height="10vh"
@@ -26,7 +25,7 @@ const Nav = () => {
 				<Link to="/checkout" style={{display:"flex", alignItems:"center", textDecoration:"none"}}>
 					<ShoppingCartOutlinedIcon style={{ color: "white" }} />
 					<Title color="white" size="x-large" margin="0 0 0 10px">
-						{items.length}
+						{props.items.length}
 					</Title>
 				</Link>
 			</Container>
@@ -34,4 +33,10 @@ const Nav = () => {
 	);
 };
 
-export default Nav;
+const mapStateToProps = (state) => {
+	return {
+		items:state.cart.items,
+	}
+}
+
+export default connect(mapStateToProps,null)(Nav);

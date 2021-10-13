@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import ProductCard from "../ProductsPage/ProductCard";
 
-const SearchPage = () => {
-    const products = useSelector((state) => state.products.products);
+const SearchPage = (props) => {
 	const styles = {
 		display: "flex",
 		justifyContent: "center",
@@ -11,7 +10,7 @@ const SearchPage = () => {
 
 	return (
 		<div style={styles}>
-			{products.map((product) => (
+			{props.products.map((product) => (
 				<div style={{ margin: "10px" }} key={product.id}>
 					<ProductCard
 						title={product.title}
@@ -22,8 +21,14 @@ const SearchPage = () => {
 					/>
 				</div>
 			))}
-		</div>        
-    )
-}
+		</div>
+	);
+};
 
-export default SearchPage
+const mapStateToProps = (state) => {
+	return {
+		products: state.products.products,
+	};
+};
+
+export default connect(mapStateToProps, null)(SearchPage);
