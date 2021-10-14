@@ -36,4 +36,5 @@ export const CheckoutQuantity = styled.div`
 
 export const Span = styled.span`
     font-size: large;
+	cursor: pointer;
 `;
