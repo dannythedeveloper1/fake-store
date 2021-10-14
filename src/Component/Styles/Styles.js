@@ -31,8 +31,6 @@ export const Title = styled.h5`
 export const Img = styled.img`
 	width: 100%;
 	height: 150px;
-	/* width: 150px; */
-	/* height: 150px; */
 	object-fit: contain;
 `;
 
@@ -51,4 +49,15 @@ export const Input = styled.input`
 	width: 350px;
 	border: none;
 	outline: none;
+`;
+
+export const LoadingContainer = styled.div`
+	position: fixed;
+	background-color: white;
+	height: 90vh;
+	width: 100vw;
+	z-index: 20;
+	display: ${(props) => (props.loading ? "flex" : "none")};
+	justify-content: center;
+	align-items: center;
 `;

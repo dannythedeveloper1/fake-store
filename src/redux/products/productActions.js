@@ -1,3 +1,4 @@
+import { TimerOff } from "@material-ui/icons";
 import axios from "axios";
 import {
 	FETCH_PRODUCTS_FAILURE,
@@ -28,24 +29,35 @@ export const fetchProductsFailure = (error) => {
 export const fetchProducts = () => {
 	return (dispatch) => {
 		dispatch(fetchProductsRequest());
-		axios
-			.get("./products.json")
-			.then((res) => dispatch(fetchProductsSuccess(res.data)))
-			.catch((error) => dispatch(fetchProductsFailure(error.message)));
+
+		const timer = setTimeout(() => {
+			axios
+				.get("./products.json")
+				.then((res) => {
+					dispatch(fetchProductsSuccess(res.data));
+				})
+				.catch((error) => dispatch(fetchProductsFailure(error.message)));
+
+			clearTimeout(timer);
+		}, 2000);
 	};
 };
 
 export const searchProducts = (category) => {
 	return (dispatch) => {
 		dispatch(fetchProductsRequest());
-		axios
-			.get("./products.json")
-			.then((res) => {
-				const filteredData = res.data.filter(
-					(product) => product.category === category
-				);
-				dispatch(fetchProductsSuccess(filteredData));
-			})
-			.catch((error) => dispatch(fetchProductsFailure(error.message)));
+		const timer = setTimeout(() => {
+			axios
+				.get("./products.json")
+				.then((res) => {
+					const filteredData = res.data.filter(
+						(product) => product.category === category
+					);
+					dispatch(fetchProductsSuccess(filteredData));
+				})
+				.catch((error) => dispatch(fetchProductsFailure(error.message)));
+
+			clearTimeout(timer);
+		}, 2000);
 	};
 };
