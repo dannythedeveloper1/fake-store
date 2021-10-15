@@ -1,4 +1,3 @@
-import { TimerOff } from "@material-ui/icons";
 import axios from "axios";
 import {
 	FETCH_PRODUCTS_FAILURE,
